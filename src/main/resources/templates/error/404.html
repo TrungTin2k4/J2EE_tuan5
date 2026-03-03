@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{_layout}">
+<head>
+    <meta charset="UTF-8" />
+    <title>Not found</title>
+</head>
+<body>
+<div layout:fragment="content" class="container body-content text-center">
+    <h3>Không tìm thấy dữ liệu</h3>
+    <a th:href="@{/products}" class="btn btn-primary mt-3">Quay lại danh sách</a>
+</div>
+</body>
+</html>

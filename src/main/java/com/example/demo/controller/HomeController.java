@@ -1,26 +1,26 @@
 package com.example.demo.controller;
 
-import com.example.demo.model.Student;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import java.nio.charset.StandardCharsets;
+
+import org.springframework.web.util.UriUtils;
 
 @Controller
 public class HomeController {
-    @GetMapping("/home")
-    public String index() {
-        return "index";
+    @GetMapping("/")
+    public String root() {
+        return "redirect:/products";
     }
 
-    @GetMapping("/demo")
-    public String demoPage(Model model) {
-        // Tạo đối tượng Student
-        Student student = new Student("Nguyễn Văn A", "Welcome Thymeleaf!");
-
-        // Thêm student vào model
-        model.addAttribute("student", student);
-        model.addAttribute("message", "Welcome Thymeleaf!");
-
-        return "demo";
+    @GetMapping("/home/search")
+    public String search(@RequestParam(value = "keyword", required = false) String keyword) {
+        if (keyword == null || keyword.isBlank()) {
+            return "redirect:/products";
+        }
+        String encoded = UriUtils.encodeQueryParam(keyword, StandardCharsets.UTF_8);
+        return "redirect:/products?keyword=" + encoded;
     }
 }
